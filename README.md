@@ -1,5 +1,5 @@
 Function App Steps:
-	- Create Azure Function App project. Deselect azurite and seelct 6.0 LT (not isolated)
+- Create Azure Function App project. Deselect azurite and seelct 6.0 LT (not isolated)
 	- Paste code into Function1.cs file (can also rename it if you like)
 	- Paste json into host.json
 	- Add packages:
