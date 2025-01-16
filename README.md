@@ -40,9 +40,7 @@ Function App Steps:
             	value so the emails are all sent. Then set these back as desired with the logging to None or Error.
 	- Click "Overview" and click "Start"
 	- If you see an error when running the app regarding "System.Memory.Data", add this to the proj file and re-publish:
-	  <ItemGroup>
-	    <FunctionsPreservedDependencies Include="System.Memory.Data.dll" />
-	  </ItemGroup>
+		- &lt;ItemGroup&gt;&lt;FunctionsPreservedDependencies Include="System.Memory.Data.dll" /&gt;&lt;/ItemGroup&gt;
 	- Under the Monitoring section, select Logs and run the "Traces" query. Keep redfreshing until you see log data come 
         in - and verify the emails are sent. 
 	- If all works correctly, this should run every 5 minutes (with a 15 second delay), checking for an updated token price, 
