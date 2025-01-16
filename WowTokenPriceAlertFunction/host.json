@@ -1,0 +1,17 @@
+{
+    "version": "2.0",
+    "logging": {
+        "applicationInsights": {
+            "samplingSettings": {
+                "isEnabled": true,
+                "excludedTypes": "Request"
+            },
+            "enableLiveMetricsFilters": true
+        },
+        "logLevel": {
+            // Add key in Azure under the function Settings>Environment Variables: AzureFunctionsJobHost__logging__logLevel__Default
+            //  Set this to None, Information or Error
+            "Default": "None"
+        }
+    }
+}

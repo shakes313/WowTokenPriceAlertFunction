@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "WowTokenPriceAlertFunction": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7187",
+      "launchBrowser": false
+    }
+  }
+}
