@@ -46,6 +46,8 @@ namespace TokenPriceAlertFunctionApp
         private readonly string acsConnectionString = Environment.GetEnvironmentVariable("WCS_CONNECTION_STRING");
         private readonly string acsPhoneNumber = Environment.GetEnvironmentVariable("WCS_PHONE_NUMBER");
 
+        private readonly bool storeLastPrice = Environment.GetEnvironmentVariable("STORE_LAST_PRICE") == "Y";
+
         [FunctionName("WowTokenPriceAlertFunction")]
         public async Task Run([TimerTrigger("15 */5 * * * *", UseMonitor = false)] TimerInfo myTimer, ILogger log)
         {
@@ -57,11 +59,12 @@ namespace TokenPriceAlertFunctionApp
                 if (tokenAmount == -1)
                     return;
 
-                var lastTokenPrice = await GetLastTokenPriceAsync();
+                var lastTokenPrice = storeLastPrice ? await GetLastTokenPriceAsync() : -1;
                 if (lastTokenPrice == tokenAmount)
                     return;
 
-                await SaveTokenPriceAsync(tokenAmount);
+                if (storeLastPrice)
+                    await SaveTokenPriceAsync(tokenAmount);
 
                 var diff = tokenAmount - lastTokenPrice;
                 var diffString = lastTokenPrice <= 0 ? "" : $" [{(diff > 0 ? "+" : "")}{diff:n0}]";
