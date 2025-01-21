@@ -46,10 +46,12 @@ namespace TokenPriceAlertFunctionApp
         private readonly string acsConnectionString = Environment.GetEnvironmentVariable("WCS_CONNECTION_STRING");
         private readonly string acsPhoneNumber = Environment.GetEnvironmentVariable("WCS_PHONE_NUMBER");
 
+        // Note: if not storing the last token price, the emails will be sent every time this runs to ALWAYS_NOTIFY_EMAIL_TO
+        //  Else it will use the stored (prior) price to detect if there was a change
         private readonly bool storeLastPrice = Environment.GetEnvironmentVariable("STORE_LAST_PRICE") == "Y";
 
         [FunctionName("WowTokenPriceAlertFunction")]
-        public async Task Run([TimerTrigger("15 */5 * * * *", UseMonitor = false)] TimerInfo myTimer, ILogger log)
+        public async Task Run([TimerTrigger("15 */20 * * * *", UseMonitor = false)] TimerInfo myTimer, ILogger log)
         {
             _logger = log;
 
